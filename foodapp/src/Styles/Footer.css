@@ -1,0 +1,59 @@
+.footer{
+    width:100%;
+    margin-top: 8%;
+  }
+  .footer1{
+    background-color: rgb(230, 230, 230);
+    padding-bottom: 10px;
+    padding-top: 5px;
+    width: 100%;
+    display: inline-flex;
+  }
+  .footer12 img{
+    height: 60px;
+    margin-top: 5%;
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+  .footer11{
+    width:40%;
+    padding-top: 15px;;
+    margin-left: 15%;
+    margin-right: 40px;
+    font-weight: 700;
+      font-size: 28px;
+      line-height: 32px;
+      letter-spacing: -0.6px;
+      color: rgba(2, 6, 12, 0.75);
+  }
+  footer{
+    height: fit-content ;
+    background-color: black;  
+  }
+  .footer2{
+    margin-left: 17%;
+    margin-right: 10%;
+    height: max-content;
+    color: azure;
+    display: inline-flex;
+  }
+  .footer2 img{
+    height: 40px;
+    margin-top: 45px;
+  }
+  .footer22{
+    color: aliceblue;
+  }
+  .deliverto,.contact,.company{
+    margin-top: 30px;
+    margin-left: 50px;
+  }
+  .deliverto li,.contact li,.company li{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: rgb(146, 146, 146);
+  }
+  .contact1{
+    margin-top: 60px;
+  }
+  

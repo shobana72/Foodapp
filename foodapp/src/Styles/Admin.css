@@ -1,0 +1,39 @@
+.admin-container{
+    margin-top: 110px;
+    margin-left: 30%;
+    border-radius: 8px;
+    padding-left: 20px;
+}
+.admin{
+    display: inline-flex;
+    width: 100%;
+}
+.uploadform input,.uploadform textarea{
+  margin-top: 5px;
+  width: 90%;
+  padding: 10px;
+  border-radius: 8px;
+}
+.uploadform div{
+    margin-top: 10px;
+    color: rgb(100, 100, 100);
+}
+.uploadform button{
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: 20px;
+  height: 35px;
+  width: 200px;
+  margin-left: 35%;
+  color: white;
+  background-color: darkorange;
+  border: none;
+  border-radius: 8px;
+}
+.uploadform label{
+    font-weight: 800;
+}
+.uploadform input::placeholder{
+    font-weight: 700;
+    font-size: small;
+  }

@@ -1,0 +1,115 @@
+.containered{
+  height: 100%;
+  margin-top: 90px;
+  margin-left: 15%;
+  margin-right: 14%;
+  background-size: cover;
+} 
+.currentitems{
+  display: inline-flex;
+  height: 200px;
+}
+.recomend{
+  margin: 5px;
+  box-shadow: 0 3px 0 0 rgba(182, 182, 182, 0.19);
+}
+.toprest{
+  margin-top: 5%;
+  box-shadow: 0 3px 0 0 rgba(182, 181, 181, 0.19);
+}
+.toplist{
+  height: 300px;
+  display: inline-flex;
+}
+.topitems{
+  padding-left: 40px;
+  height: 175px;
+  width: 270px;
+  border-radius:15px;
+}
+.topitemnames,.topdiv{
+  margin-left: 40px ;
+  margin-top: 2px;
+  position: relative;
+}
+ul{
+  list-style-type: none;
+}
+.topitems:hover{
+  height: 155px;
+  width: 250px;
+}
+.currentloc{
+  margin-top: 5%;
+}
+.currentloc ul{
+  margin-bottom: 5px;
+}
+.currentloc li{
+  display: inline-flex;
+  color: rgb(77, 77, 77);
+  font-weight: 400;
+  border-color: rgb(151, 151, 151);
+  border-style: solid;
+  border-width: 1px;
+  padding: 5px;
+  margin-top: 5px;
+  margin-left: 10px;
+  -o-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  border-radius: 15px;
+}
+.container2{
+  height: 100%;
+  margin-left: 3%;
+  margin-right: 3%;
+  border-radius:8px;
+  background-size: cover;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  border-color: rgb(161, 161, 161);
+}
+.topcities{
+  margin-top: 4%;
+}
+.topcities h2{
+  margin-left: 3%;
+  padding-top:30px;
+}
+.topcities li{
+  width:250px;
+  margin: 8px;
+  color: rgb(77, 77, 77);
+  font-weight: 500;
+  display: inline-flex;
+  border-color: rgb(161, 161, 161);
+  border-style: solid;
+  border-width: 1px;
+  padding: 15px;
+  border-radius: 8px;
+  
+}
+.toprestnear{
+  margin-top: 5%;
+  padding-bottom:20px;
+}
+.toprestnear li{
+  width:45%;
+  margin: 8px;
+  color: rgb(77, 77, 77);
+  font-weight: 500;
+  display: inline-flex;
+  border-color: rgb(161, 161, 161);
+  border-style: solid;
+  border-width: 1px;
+  padding: 15px;
+  border-radius: 8px;
+}
+.toprestnear h2{
+  margin-left: 3%;
+}
+.rightslidebar{
+  top:0px;
+  right: 0px;
+}

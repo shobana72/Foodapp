@@ -1,0 +1,111 @@
+/* 
+.signincontainer img{
+  height: 17px;
+}
+.login a,.signincontainer a{
+  text-decoration: none;
+  font-weight: 700;
+  color: darkorange ;
+}
+.login p,h1{
+  color: rgb(51, 51, 51);
+}
+.signinform label,.signupform label{
+  font-weight: 700;
+}
+.signinform input{
+    height: 15px;
+    width: 90%;
+    margin-top:2% ;
+    padding: 10px;
+    border-radius: 8px;
+}
+::placeholder{
+  font-weight: 700;
+  font-size: small;
+}
+.signupform input{
+  height: 15px;
+  width: 90%;
+  margin-top:2% ;
+  padding: 10px;
+  border-radius: 8px;
+}
+.signinform div,.signupform div{
+  margin-top: 20px;
+  color: rgb(100, 100, 100);
+}
+.signinform button,.signupform button{
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: 30px;
+  width: 96%;
+  height:  50px;
+  color: white;
+  background-color: darkorange;
+  border: none;
+  border-radius: 8px;
+  cursor:pointer;
+}
+.signbar{
+  margin-left: 34%;
+  margin-right: 30%;
+  background-color: rgb(243, 243, 243);
+  border-radius: 18px;
+  box-shadow: 8px 8px 8px rgba(190, 190, 190, 0.35);
+  margin-top: 110px;
+  padding:7px;
+}
+
+#signin{
+  margin: 30px;
+}
+#signup{
+  margin: 5px 30px 10px 30px;
+}
+.signupbar{
+  margin-left: 34%;
+  margin-right: 30%;
+  background-color: rgb(243, 243, 243);
+  border-radius: 18px;
+  box-shadow: 8px 8px 8px rgba(190, 190, 190, 0.35);
+  margin-top: 110px;
+  padding:7px;  
+} */
+
+
+form {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  margin: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.sign input{
+  width: 30%;
+  margin-left: 500px;
+}
+
+.sign button{
+  width: 10%;
+  margin-left: 650px;
+  text-align: center;
+  border-radius: 30px;
+  background-color: aqua;
+}
+
+.sign{
+  text-align: center;
+  margin-top: 100px;
+}
