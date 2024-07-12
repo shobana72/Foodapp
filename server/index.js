@@ -320,114 +320,259 @@
 
 
 
+// const express = require('express');
+// const cors = require('cors');
+// const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+
+// const app = express();
+// const port = process.env.PORT || 5000;
+
+// // Middleware connected to frontend
+// app.use(cors());
+// app.use(express.json());
+
+// app.get('/', (req, res) => {
+//     res.send("Hello World!");
+// });
+
+// const uri = "mongodb+srv://Food-app:Foodapp123@cluster0.hfyydkn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// const client = new MongoClient(uri, {
+//     serverApi: {
+//         version: ServerApiVersion.v1,
+//         strict: true,
+//         deprecationErrors: true,
+//     }
+// });
+
+// async function run() {
+//     try {
+//         await client.connect();
+
+//         const FoodCollections = client.db("food_collections").collection("Foods");
+
+//         // Endpoint to get paginated food items
+//         app.get("/all-foods", async (req, res) => {
+//             const page = parseInt(req.query.page) || 1;
+//             const limit = parseInt(req.query.limit) || 10;
+
+//             const skip = (page - 1) * limit;
+//             const total = await FoodCollections.countDocuments();
+//             const totalPages = Math.ceil(total / limit);
+
+//             const foods = await FoodCollections.find().skip(skip).limit(limit).toArray();
+
+//             res.json({
+//                 foods,
+//                 totalPages,
+//                 currentPage: page
+//             });
+//         });
+
+//         app.get("/foods/:id", async (req, res) => {
+//             const id = req.params.id;
+//             const filter = { _id: new ObjectId(id) };
+//             const result = await FoodCollections.findOne(filter);
+//             res.send(result);
+//         });
+
+//         app.post("/upload.food", async (req, res) => {
+//             const data = req.body;
+//             const result = await FoodCollections.insertOne(data);
+//             res.send(result);
+//         });
+
+//         app.patch('/food/:id', async (req, res) => {
+//             const id = req.params.id;
+//             const updateFoodData = req.body;
+//             const filter = { _id: new ObjectId(id) };
+
+//             const updateDoc = {
+//                 $set: {
+//                     ...updateFoodData
+//                 },
+//             };
+//             const options = { upsert: true };
+//             const result = await FoodCollections.updateOne(filter, updateDoc, options);
+//             res.send(result);
+//         });
+
+//         app.delete('/food/:id', async (req, res) => {
+//             const id = req.params.id;
+//             const filter = { _id: new ObjectId(id) };
+//             const result = await FoodCollections.deleteOne(filter);
+//             res.send(result);
+//         });
+
+//         // Bulk delete endpoint
+//         app.delete('/foods', async (req, res) => {
+//             const { ids } = req.body; // Expecting an array of IDs
+//             const objectIds = ids.map(id => new ObjectId(id));
+//             const result = await FoodCollections.deleteMany({ _id: { $in: objectIds } });
+//             res.send(result);
+//         });
+
+//         app.post('/signin', async (req, res) => {
+//             const { email, password } = req.body;
+//             // Implement your authentication logic here
+//             res.json({ token: 'your-jwt-token' }); // Example response
+//           });
+          
+
+//         await client.db("admin").command({ ping: 1 });
+//         console.log("Pinged your deployment, successfully connected to MongoDB");
+//     } finally {
+//         // Ensure the client will close when you finish/error
+//         //await client.close();
+//     }
+// }
+// run().catch(console.dir);
+
+// app.listen(port, () => {
+//     console.log(`Listening on port ${port}`);
+// });
+
+
+
 const express = require('express');
 const cors = require('cors');
+const multer = require('multer');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Middleware connected to frontend
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.get('/', (req, res) => {
-    res.send("Hello World!");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
 });
+
+const upload = multer({ storage });
 
 const uri = "mongodb+srv://Food-app:Foodapp123@cluster0.hfyydkn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    }
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
 });
 
 async function run() {
-    try {
-        await client.connect();
+  try {
+    await client.connect();
 
-        const FoodCollections = client.db("food_collections").collection("Foods");
+    const FoodCollections = client.db("food_collections").collection("Foods");
 
-        // Endpoint to get paginated food items
-        app.get("/all-foods", async (req, res) => {
-            const page = parseInt(req.query.page) || 1;
-            const limit = parseInt(req.query.limit) || 10;
+    app.get("/all-foods", async (req, res) => {
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 12;
 
-            const skip = (page - 1) * limit;
-            const total = await FoodCollections.countDocuments();
-            const totalPages = Math.ceil(total / limit);
+      const skip = (page - 1) * limit;
+      const total = await FoodCollections.countDocuments();
+      const totalPages = Math.ceil(total / limit);
 
-            const foods = await FoodCollections.find().skip(skip).limit(limit).toArray();
+      const foods = await FoodCollections.find().skip(skip).limit(limit).toArray();
 
-            res.json({
-                foods,
-                totalPages,
-                currentPage: page
-            });
-        });
+      res.json({
+        foods,
+        totalPages,
+        currentPage: page
+      });
+    });
 
-        app.get("/foods/:id", async (req, res) => {
-            const id = req.params.id;
-            const filter = { _id: new ObjectId(id) };
-            const result = await FoodCollections.findOne(filter);
-            res.send(result);
-        });
+    app.get("/foods/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await FoodCollections.findOne(filter);
+      res.send(result);
+    });
 
-        app.post("/upload.food", async (req, res) => {
-            const data = req.body;
-            const result = await FoodCollections.insertOne(data);
-            res.send(result);
-        });
+    app.post('/upload.food', upload.single('img'), async (req, res) => {
+        try {
+          const { foodname, price, description, category, quantity, imgurl } = req.body;
+          const imgPath = req.file ? `/uploads/${req.file.filename}` : imgurl;
+  
+          const foodObj = {
+            foodname,
+            imgurl: imgPath,
+            price,
+            description,
+            category,
+            quantity
+          };
+  
+          const result = await FoodCollections.insertOne(foodObj);
+          res.send(result);
+        } catch (error) {
+          res.status(500).send({ message: 'Error adding food' });
+        }
+      });
+      
 
-        app.patch('/food/:id', async (req, res) => {
-            const id = req.params.id;
-            const updateFoodData = req.body;
-            const filter = { _id: new ObjectId(id) };
+    app.patch('/food/:id', async (req, res) => {
+      const id = req.params.id;
+      const updateFoodData = req.body;
+      const filter = { _id: new ObjectId(id) };
 
-            const updateDoc = {
-                $set: {
-                    ...updateFoodData
-                },
-            };
-            const options = { upsert: true };
-            const result = await FoodCollections.updateOne(filter, updateDoc, options);
-            res.send(result);
-        });
+      const updateDoc = {
+        $set: {
+          ...updateFoodData
+        },
+      };
+      const options = { upsert: true };
+      const result = await FoodCollections.updateOne(filter, updateDoc, options);
+      res.send(result);
+    });
 
-        app.delete('/food/:id', async (req, res) => {
-            const id = req.params.id;
-            const filter = { _id: new ObjectId(id) };
-            const result = await FoodCollections.deleteOne(filter);
-            res.send(result);
-        });
+    app.delete('/food/:id', async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const result = await FoodCollections.deleteOne(filter);
+      res.send(result);
+    });
 
-        // Bulk delete endpoint
-        app.delete('/foods', async (req, res) => {
-            const { ids } = req.body; // Expecting an array of IDs
-            const objectIds = ids.map(id => new ObjectId(id));
-            const result = await FoodCollections.deleteMany({ _id: { $in: objectIds } });
-            res.send(result);
-        });
+    // Bulk delete endpoint
+    app.delete('/foods', async (req, res) => {
+      const { ids } = req.body; 
+      const objectIds = ids.map(id => new ObjectId(id));
+      const result = await FoodCollections.deleteMany({ _id: { $in: objectIds } });
+      res.send(result);
+    });
 
-        app.post('/signin', async (req, res) => {
-            const { email, password } = req.body;
-            // Implement your authentication logic here
-            res.json({ token: 'your-jwt-token' }); // Example response
-          });
-          
+    app.post('/signin', async (req, res) => {
+      const { email, password } = req.body;
+      
+      res.json({ token: 'your-jwt-token' }); 
+    });
 
-        await client.db("admin").command({ ping: 1 });
-        console.log("Pinged your deployment, successfully connected to MongoDB");
-    } finally {
-        // Ensure the client will close when you finish/error
-        //await client.close();
-    }
+    // Endpoint for uploading images
+    app.post('/upload-image', upload.single('image'), async (req, res) => {
+      if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+      }
+      const imageUrl = `/uploads/${req.file.filename}`;
+      res.send({ imageUrl });
+    });
+
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment, successfully connected to MongoDB");
+  } finally {
+    // Ensure the client will close when you finish/error
+    //await client.close();
+  }
 }
 run().catch(console.dir);
 
 app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
+  console.log(`Listening on port ${port}`);
 });
 

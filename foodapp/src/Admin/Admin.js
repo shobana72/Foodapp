@@ -17,7 +17,7 @@ const Admin=()=>{
     const [password,setPassword]=useState("")
 
     const handleLogin=()=>{
-        if(email==="2004yuvanshankar@gmail.com" && password==="Yuvan@123"){
+        if(email==="keerthi@gmail.com" && password==="Keerthi@123"){
             notify(); 
             navigateTo("/admin/update");
         }else{

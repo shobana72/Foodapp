@@ -26,6 +26,7 @@ function Navbar() {
                     <li className='nav' onClick={() => navigateTo('/search2')}>Menu</li>
                     <li className='nav' onClick={() => navigateTo('/offers')}>Offers</li>
                     <li className='nav' onClick={() => navigateTo('/help')}>Help</li>
+                    <li className='nav' onClick={() => navigateTo('/admin')}>Admin</li>
                     <li className='nav' onClick={() => navigateTo('/cart')}>Cart</li>
                     {isLoggedIn ? (
                         <>

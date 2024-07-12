@@ -155,7 +155,7 @@ const Updateitems = () => {
                         checked={selectedItems.includes(food._id)}
                         onChange={() => handleSelectItem(food._id)} 
                     />
-                    <Link to={`/food/${food._id}`}><img src={food.imgurl} alt={food.foodname}></img></Link>
+                    <Link to={`/food/${food._id}`}><img src={food.imgurl.startsWith('http') ? food.imgurl  : `http://localhost:5000${food.imgurl}`} alt={food.foodname}/></Link>
                 </div>
                 <div className="div2">
                     <h4><span>Category : </span>{food.foodname}</h4>
